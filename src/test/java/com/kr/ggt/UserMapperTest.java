@@ -1,0 +1,60 @@
+package com.kr.ggt;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.kr.ggt.user.UserMapper;
+import com.kr.ggt.user.UserRequest;
+import com.kr.ggt.user.UserResponse;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+
+@SpringBootTest
+public class UserMapperTest {
+
+    @Autowired
+    UserMapper userMapper;
+
+    @Test
+    void saveUser(){
+        List<UserResponse> post = userMapper.findAll();
+
+        UserRequest ur = new UserRequest();
+        ur.setGgtUserId("haunwoo1");
+        ur.setGgtUserName("장현우1");
+        ur.setGgtUserJob("프로그래머");
+        ur.setGgtUserPnum("010-6251-4223");
+        ur.setGgtUserLevel(1);
+        ur.setGgtUserPosition("수비수");
+        userMapper.saveUser(ur);
+    }
+
+    @Test
+    void userUpdate(){
+
+        UserRequest ur = new UserRequest();
+        ur.setGgtUserId("haunwoo1");
+        ur.setGgtUserName("장현우1123123");
+        ur.setGgtUserJob("프로그래머222");
+        ur.setGgtUserPnum("010-6251-4333");
+        ur.setGgtUserLevel(2);
+        ur.setGgtUserPosition("수비수겸공격수");
+        userMapper.updateUser(ur);
+
+
+    }
+
+    @Test
+    void delete () {
+        UserRequest ur = new UserRequest();
+        ur.setGgtUserId("haunwoo1");
+        userMapper.deleteUser(ur);
+    }
+
+
+
+
+}

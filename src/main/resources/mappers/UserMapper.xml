@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kr.ggt.user.UserMapper">
+
+    <!-- tb_post 테이블 전체 컬럼 -->
+    <sql id="postColumns">
+          ggt_user_idx
+        , ggt_user_id
+        , ggt_user_pnum
+        , ggt_user_name
+        , ggt_user_reg_date
+        , ggt_user_level
+        , ggt_user_position
+        , ggt_user_job
+    </sql>
+
+    <!-- 게시글 상세정보 조회 -->
+    <select id="findByIdx" parameterType="integer" resultType="com.kr.ggt.user.UserResponse">
+        SELECT
+
+        FROM
+            ggt_user
+        WHERE
+            ggt_user_idx = #{value}
+    </select>
+    <!-- 게시글 상세정보 조회 -->
+    <select id="findById" parameterType="String" resultType="com.kr.ggt.user.UserResponse">
+        SELECT
+
+        FROM
+            ggt_user
+        WHERE
+            ggt_user_id = #{value}
+    </select>
+    <!-- 게시글 상세정보 조회 -->
+    <select id="findByPnum" parameterType="String" resultType="com.kr.ggt.user.UserResponse">
+        SELECT
+
+        FROM
+            ggt_user
+        WHERE
+            ggt_user_pnum = #{value}
+    </select>
+
+    <!-- 게시글 리스트 전체조회 -->
+    <select id="findAll" resultType="com.kr.ggt.user.UserResponse">
+        SELECT
+            <include refid="postColumns" />
+        FROM
+            ggt_user
+        WHERE
+            1=1
+        ORDER BY
+            ggt_user_idx DESC
+    </select>
+
+
+        <!-- 유저 저장 -->
+    <insert id="saveUser" parameterType="com.kr.ggt.user.UserRequest">
+        INSERT INTO ggt_user (
+            <include refid="postColumns" />
+        ) VALUES (
+              #{ggtUserIdx}
+            , #{ggtUserId}
+            , #{ggtUserPnum}
+            , #{ggtUserName}
+            , Now()
+            , #{ggtUserLevel}
+            , #{ggtUserPosition}
+            , #{ggtUserJob}
+        )
+    </insert>
+
+    <!-- 계정정보수정 -->
+    <update id="updateUser" parameterType="com.kr.ggt.user.UserRequest">
+        UPDATE ggt_user
+        SET
+              ggt_user_pnum = #{ggtUserPnum}
+            , ggt_user_name = #{ggtUserName}
+            , ggt_user_level = #{ggtUserLevel}
+            , ggt_user_position = #{ggtUserPosition}
+            , ggt_user_job = #{ggtUserJob}
+        WHERE
+            ggt_user_id = #{ggtUserId}
+    </update>
+
+    <!-- 계정 삭제 -->
+    <delete id="deleteUser" parameterType="com.kr.ggt.user.UserRequest">
+        DELETE FROM ggt_user
+        WHERE ggt_user_id = #{ggtUserId}
+    </delete>
+</mapper>
