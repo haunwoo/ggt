@@ -57,7 +57,7 @@
 
 
         <!-- 유저 저장 -->
-    <insert id="saveUser" parameterType="com.kr.ggt.user.UserRequest">
+    <insert id="saveUser" parameterType="com.kr.ggt.user.UserRequest" useGeneratedKeys="true" keyProperty="ggt_user_idx">
         INSERT INTO ggt_user (
             <include refid="postColumns" />
         ) VALUES (

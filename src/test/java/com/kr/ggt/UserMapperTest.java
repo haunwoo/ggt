@@ -6,17 +6,24 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.kr.ggt.user.UserMapper;
 import com.kr.ggt.user.UserRequest;
 import com.kr.ggt.user.UserResponse;
+import com.kr.ggt.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
 public class UserMapperTest {
 
+
     @Autowired
     UserMapper userMapper;
+
+
+    @Autowired
+    UserService userService;
 
     @Test
     void saveUser(){
@@ -54,7 +61,24 @@ public class UserMapperTest {
         userMapper.deleteUser(ur);
     }
 
+    @Test
+    void saveServiceUser(){
 
+        UserRequest ur = new UserRequest();
+        ur.setGgtUserId("haunwoo1");
+        ur.setGgtUserName("장현우1");
+        ur.setGgtUserJob("프로그래머");
+        ur.setGgtUserPnum("010-6251-4223");
+        ur.setGgtUserLevel(1);
+        ur.setGgtUserPosition("수비수");
+        ur.setGgtUserRegDate(LocalDateTime.now());
+        try {
+            userService.ggtSaveUser(ur);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 }
