@@ -57,12 +57,11 @@
 
 
         <!-- 유저 저장 -->
-    <insert id="saveUser" parameterType="com.kr.ggt.user.UserRequest" useGeneratedKeys="true" keyProperty="ggt_user_idx">
+    <insert id="saveUser" parameterType="com.kr.ggt.user.UserRequest">
         INSERT INTO ggt_user (
             <include refid="postColumns" />
         ) VALUES (
-              #{ggtUserIdx}
-            , #{ggtUserId}
+              #{ggtUserId}
             , #{ggtUserPnum}
             , #{ggtUserName}
             , Now()

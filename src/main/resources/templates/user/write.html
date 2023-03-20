@@ -51,7 +51,7 @@
                 </form>
                 <p class="btn_set">
                     <button type="button" id="saveBtn" onclick="savePost();" class="btns btn_st3 btn_mid">저장</button>
-                    <a th:href="@{/post/list.do}" class="btns btn_bdr3 btn_mid">뒤로</a>
+                    <a th:href="@{/post/list.do}" class="btns btn_bdr3 btn_mid">목록</a>
                 </p>
             </section>
         </div> <!--/* .content */-->
@@ -62,29 +62,30 @@
         /*<![CDATA[*/
 
             window.onload = () => {
-                initCreatedDate();
+                //initCreatedDate();
             }
 
 
             // 등록일 초기화
             function initCreatedDate() {
-                document.getElementById('createdDate').value = dayjs().format('YYYY-MM-DD');
+                //document.getElementById('createdDate').value = dayjs().format('YYYY-MM-DD');
             }
 
 
             // 게시글 저장(수정)
             function savePost() {
                 const form = document.getElementById('saveForm');
-                const fields = [form.title, form.writer, form.content];
+
+                const fields = [form.ggtUserId, form.ggtUserPnum, form.ggtUserName, form.ggtUserPosition, form.ggtUserJob];
                 const fieldNames = ['아이디', '핸드폰번호', '이름', '포지션', '직업'];
 
                 for (let i = 0, len = fields.length; i < len; i++) {
                     isValid(fields[i], fieldNames[i]);
                 }
 
-                document.getElementById('saveBtn').disabled = true;
-                form.noticeYn.value = form.isNotice.checked;
-                form.action = [[ ${post == null} ]] ? '/post/save.do' : '/post/update.do';
+                //document.getElementById('saveBtn').disabled = true;
+                //form.noticeYn.value = form.isNotice.checked;
+                form.action = [[ ${post == null} ]] ? '/ggtAddUser.do' : '/ggtAddUser.do';
                 form.submit();
             }
 
