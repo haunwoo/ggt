@@ -23,12 +23,11 @@ public class UserService {
     @Transactional
     public void ggtUdateUser(final UserRequest param){
         userMapper.updateUser(param);
-        //return param.getGgtUserId();
     }
 
     /*유저삭제*/
-    public void ggtDeleteUser(final UserRequest param){
-        userMapper.deleteUser(param);
+    public void ggtDeleteUser(final String ggtUserId){
+        userMapper.deleteUser(ggtUserId);
     }
 
     /*idx로 유저찾기*/

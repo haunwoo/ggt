@@ -14,7 +14,7 @@
             <section>
                 <form id="saveForm" method="post" autocomplete="off">
                     <!--/* 게시글 수정인 경우, 서버로 전달할 게시글 번호 (PK) */-->
-                    <input type="hidden" id="id" name="id" th:if="${post != null}" th:value="${post.id}" />
+                    <!--<input type="hidden" id="ggtUserIdChk" name="id" th:if="${user != null}" th:value="${user.ggtUserId}" />-->
 
                     <!--/* 서버로 전달할 공지글 여부 */-->
                     <input type="hidden" id="noticeYn" name="noticeYn" />
@@ -25,33 +25,35 @@
                         <tbody>
                             <tr>
                                 <th scope="row">아이디 <span class="es">필수 입력</span></th>
-                                <td colspan="3"><input type="text" id="ggtUserId" name="ggtUserId" /></td>
+                                <td colspan="3"><input type="text" id="ggtUserId" name="ggtUserId"  placeholder="아이디를 입력해 주세요." /></td>
                             </tr>
 
                             <tr>
                                 <th>핸드폰번호 <span class="es">필수 입력</span></th>
-                                <td colspan="3"><input type="text" id="ggtUserPnum" name="ggtUserPnum" maxlength="50" placeholder="제목을 입력해 주세요." /></td>
+                                <td colspan="3"><input type="text" id="ggtUserPnum" name="ggtUserPnum"  maxlength="50" placeholder="핸드폰 번호를 입력해 주세요." /></td>
                             </tr>
 
                             <tr>
                                 <th>이름 <span class="es">필수 입력</span></th>
-                                <td colspan="3"><input type="text" id="ggtUserName" name="ggtUserName" maxlength="10" placeholder="이름을 입력해 주세요." /></td>
+                                <td colspan="3"><input type="text" id="ggtUserName" name="ggtUserName"  maxlength="10" placeholder="이름을 입력해 주세요." /></td>
                             </tr>
 
                             <tr>
                                 <th>포지션 <span class="es">필수 입력</span></th>
-                                <td colspan="3"><textarea id="ggtUserPosition" name="ggtUserPosition" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea></td>
+                                <td colspan="3"><input type="text" id="ggtUserPosition" name="ggtUserPosition"  maxlength="10" placeholder="포지션을 입력해 주세요." /></td>
                             </tr>
                             <tr>
                                 <th>직업 <span class="es">필수 입력</span></th>
-                                <td colspan="3"><textarea id="ggtUserJob" name="ggtUserJob" cols="50" rows="10" placeholder="내용을 입력해 주세요."></textarea></td>
+                                <td><input type="text" id="ggtUserJob" name="ggtUserJob"  maxlength="10" placeholder="직업을 입력해 주세요." /></td>
+                                <th>권한 <span class="es">필수 입력</span></th>
+                                <td><input type="text" id="ggtUserLevel" name="ggtUserLevel"  maxlength="10" placeholder="권한을 입력해 주세요" /></td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
                 <p class="btn_set">
                     <button type="button" id="saveBtn" onclick="savePost();" class="btns btn_st3 btn_mid">저장</button>
-                    <a th:href="@{/post/list.do}" class="btns btn_bdr3 btn_mid">목록</a>
+                    <a th:href="@{/ggtUserList.do}" class="btns btn_bdr3 btn_mid">목록</a>
                 </p>
             </section>
         </div> <!--/* .content */-->
@@ -63,14 +65,8 @@
 
             window.onload = () => {
                 //initCreatedDate();
+                renderPostInfo();
             }
-
-
-            // 등록일 초기화
-            function initCreatedDate() {
-                //document.getElementById('createdDate').value = dayjs().format('YYYY-MM-DD');
-            }
-
 
             // 게시글 저장(수정)
             function savePost() {
@@ -83,12 +79,28 @@
                     isValid(fields[i], fieldNames[i]);
                 }
 
-                //document.getElementById('saveBtn').disabled = true;
+                document.getElementById('saveBtn').disabled = true;
                 //form.noticeYn.value = form.isNotice.checked;
-                form.action = [[ ${post == null} ]] ? '/ggtAddUser.do' : '/ggtAddUser.do';
+                form.action = [[ ${user == null} ]] ? '/ggtUserAdd.do' : '/ggtUserUpdate.do';
                 form.submit();
             }
 
+            // 유저 상세정보 렌더링
+            function renderPostInfo() {
+              const user = [[ ${user} ]];
+
+              if ( !user ) {
+                initCreatedDate();
+                return false;
+              }
+
+              const form = document.getElementById('saveForm');
+              const fields = ['ggtUserId', 'ggtUserPnum', 'ggtUserName', 'ggtUserPosition', 'ggtUserJob', 'ggtUserLevel'];
+
+              fields.forEach(field => {
+                form[field].value = user[field];
+              })
+            }
         /*]]>*/
         </script>
     </th:block>

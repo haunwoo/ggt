@@ -14,7 +14,7 @@ public interface UserMapper {
     void updateUser(UserRequest param);
 
     //삭제
-    void deleteUser(UserRequest param);
+    void deleteUser(String ggtUserId);
 
     //idx로 찾기
     UserResponse findByIdx(int idx);

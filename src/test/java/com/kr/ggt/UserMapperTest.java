@@ -43,22 +43,13 @@ public class UserMapperTest {
     void userUpdate(){
 
         UserRequest ur = new UserRequest();
-        ur.setGgtUserId("haunwoo1");
+        ur.setGgtUserId("haunwoo");
         ur.setGgtUserName("장현우1123123");
         ur.setGgtUserJob("프로그래머222");
         ur.setGgtUserPnum("010-6251-4333");
         ur.setGgtUserLevel(2);
         ur.setGgtUserPosition("수비수겸공격수");
         userMapper.updateUser(ur);
-
-
-    }
-
-    @Test
-    void delete () {
-        UserRequest ur = new UserRequest();
-        ur.setGgtUserId("haunwoo1");
-        userMapper.deleteUser(ur);
     }
 
     @Test
