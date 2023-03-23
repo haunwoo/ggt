@@ -1,13 +1,14 @@
-package com.kr.ggt.user;
+package com.kr.ggt.domain.user;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class UserResponse {
+@Setter
+public class UserRequest {
 
-    private int ggtUserIdx;                 //인덱스
     private String ggtUserId;               //아이디
     private String ggtUserPnum;             //핸드폰번호
     private String ggtUserName;             //이름

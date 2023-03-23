@@ -1,12 +1,9 @@
 package com.kr.ggt;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.kr.ggt.user.UserMapper;
-import com.kr.ggt.user.UserRequest;
-import com.kr.ggt.user.UserResponse;
-import com.kr.ggt.user.UserService;
+import com.kr.ggt.domain.user.UserMapper;
+import com.kr.ggt.domain.user.UserRequest;
+import com.kr.ggt.domain.user.UserResponse;
+import com.kr.ggt.domain.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.kr.ggt.user;
+package com.kr.ggt.domain.user;
 
 import org.apache.ibatis.annotations.Mapper;
 

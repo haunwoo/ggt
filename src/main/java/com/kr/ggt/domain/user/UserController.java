@@ -1,8 +1,7 @@
-package com.kr.ggt.user;
+package com.kr.ggt.domain.user;
 
 import com.kr.ggt.common.dto.MessageDto;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.kr.ggt.user;
+package com.kr.ggt.domain.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
