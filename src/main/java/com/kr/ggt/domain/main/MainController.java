@@ -13,9 +13,16 @@ public class MainController {
 
     //메인페이지
     @RequestMapping(value="/", method= RequestMethod.GET)
-    public String openUserAdd(Model model) {
+    public String mainIndex(Model model) {
 
         return "main/index";
+    }
+
+    //테스트
+    @RequestMapping(value="/test", method= RequestMethod.GET)
+    public String test(Model model) {
+
+        return "main/test";
     }
 
 }

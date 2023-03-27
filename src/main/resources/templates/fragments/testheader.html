@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<body th:fragment="theader">
+
+        <header class="site-navbar py-4" role="banner">
+
+            <div class="container">
+              <div class="d-flex align-items-center">
+                <div class="site-logo">
+                  <a href="/">
+                    <!--<img src="images/logo.png" alt="Logo">-->
+                    <h1 class="text-white">GGT</h1>
+                  </a>
+                </div>
+                <div class="ml-auto">
+                  <nav class="site-navigation position-relative text-right" role="navigation">
+                    <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                      <li class="active"><a href="index.html" class="nav-link">홈</a></li>
+                      <li><a href="matches.html" class="nav-link">장부</a></li>
+                      <li><a href="players.html" class="nav-link">투표</a></li>
+                      <li><a href="players.html" class="nav-link">팀원정보</a></li>
+                      <li><a href="blog.html" class="nav-link">갤러리</a></li>
+                    </ul>
+                  </nav>
+
+                  <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white">
+                    <span class="icon-menu h3 text-white"></span>
+                  </a>
+
+                </div>
+              </div>
+            </div>
+
+        </header>
+</body>
+
+</html>
