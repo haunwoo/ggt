@@ -32,7 +32,6 @@ public class UserController {
 
         MessageDto message = new MessageDto("사용자 저장 완료되었습니다.", "/ggtUserList.do", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
-        //return "redirect:ggtUserList.do";
     }
     
     //사용자 수정
@@ -42,7 +41,6 @@ public class UserController {
 
         MessageDto message = new MessageDto("사용자 수정이 완료되었습니다.", "/ggtUserList.do", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
-        //return "redirect:/ggtUserList.do";
 
     }
 
@@ -70,14 +68,13 @@ public class UserController {
         return "user/view";
     }
 
-     // 게시글 삭제
+     //사용자 삭제
     @PostMapping("/ggtUserdelete.do")
     public String deletePost(@RequestParam final String ggtUserId, Model model) {
         userService.ggtDeleteUser(ggtUserId);
 
         MessageDto message = new MessageDto("사용자가 삭제되었습니다", "/ggtUserList.do", RequestMethod.GET, null);
         return showMessageAndRedirect(message, model);
-        //return "redirect:/ggtUserList.do";
     }
 
     // 사용자에게 메시지를 전달하고, 페이지를 리다이렉트 한다.
