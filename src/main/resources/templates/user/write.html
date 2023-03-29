@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/admin/basic">
     <th:block layout:fragment="title">
         <title>글작성 페이지</title>
     </th:block>
@@ -68,7 +68,7 @@
                 renderPostInfo();
             }
 
-            // 게시글 저장(수정)
+            // 사용자 저장(수정)
             function savePost() {
                 const form = document.getElementById('saveForm');
 
@@ -85,7 +85,7 @@
                 form.submit();
             }
 
-            // 유저 상세정보 렌더링
+            // 사용자 상세정보 렌더링
             function renderPostInfo() {
               const user = [[ ${user} ]];
 

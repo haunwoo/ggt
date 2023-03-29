@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/sub/basic">
+
+  <th:block layout:fragment="title">
+    <title>투표</title>
+  </th:block>
+
+  <th:block layout:fragment="content">
+
+    <div class="site-wrap">
+
+        <div class="hero overlay" style="background-image: url('/images/bg_3.jpg');">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-lg-9 mx-auto text-center">
+                <h1 class="text-white">투표</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="site-section">
+          <div class="container">
+
+            <div class="row">
+              <div class="col-lg-7">
+
+                <form action="#">
+
+                  <div class="col-lg-6">
+                    <div class="widget-next-match">
+                      <div class="widget-title">
+                        <h3>참여투표</h3>
+                      </div>
+
+                      <table class="table custom-table">
+                        <tbody>
+                          <tr>
+                            <td>일시 : </td>
+                            <td><strong class="text-white">2023-03-30</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="margin-top:10px;">
+                    <input type="submit" class="btn btn-primary py-3 px-5" value="참석">
+                    <input type="submit" class="btn btn-primary py-3 px-5" value="불참">
+                  </div>
+
+
+                </form>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+    </div>
+
+
+  </th:block>
+</html>
