@@ -1,5 +1,6 @@
 package com.kr.ggt.domain.user;
 
+import com.kr.ggt.common.dto.SearchDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,5 +27,8 @@ public interface UserMapper {
     UserResponse findByPnum(String pNum);
 
     //전체출력
-    List<UserResponse> findAll();
+    List<UserResponse> findAll(SearchDto params);
+
+    //전체출력
+    int count(SearchDto params);
 }

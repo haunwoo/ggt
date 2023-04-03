@@ -1,9 +1,13 @@
 package com.kr.ggt.domain.user;
 
+import com.kr.ggt.common.dto.SearchDto;
+import com.kr.ggt.paging.Pagination;
+import com.kr.ggt.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -49,8 +53,24 @@ public class UserService {
     }
 
     /*전체출력*/
-    public List<UserResponse> ggtFindAll(){
-        return userMapper.findAll();
+    public PagingResponse<UserResponse> ggtFindAll(final SearchDto params){
+
+        int count = userMapper.count(params);
+        if (count < 1) {
+            return new PagingResponse<>(Collections.emptyList(), null);
+        }
+
+        Pagination pagination = new Pagination(count, params);
+        params.setPagination(pagination);
+
+        List<UserResponse> list = userMapper.findAll(params);
+        return new PagingResponse<>(list, pagination);
+        //return userMapper.findAll(params);
+    }
+
+    /*유저 카운트 출력*/
+    public int ggtCount(final SearchDto params){
+        return userMapper.count(params);
     }
 
 

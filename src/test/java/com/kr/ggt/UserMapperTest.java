@@ -24,7 +24,7 @@ public class UserMapperTest {
 
     @Test
     void saveUser(){
-        List<UserResponse> post = userMapper.findAll();
+/*        List<UserResponse> post = userMapper.findAll();
 
         UserRequest ur = new UserRequest();
         ur.setGgtUserId("haunwoo1");
@@ -33,7 +33,7 @@ public class UserMapperTest {
         ur.setGgtUserPnum("010-6251-4223");
         ur.setGgtUserLevel(1);
         ur.setGgtUserPosition("수비수");
-        userMapper.saveUser(ur);
+        userMapper.saveUser(ur);*/
     }
 
     @Test

@@ -4,7 +4,7 @@
 <mapper namespace="com.kr.ggt.domain.user.UserMapper">
 
     <!-- tb_post 테이블 전체 컬럼 -->
-    <sql id="postColumns">
+    <sql id="userColumns">
           ggt_user_id
         , ggt_user_pnum
         , ggt_user_name
@@ -17,7 +17,7 @@
     <!-- 게시글 상세정보 조회 -->
     <select id="findByIdx" parameterType="integer" resultType="com.kr.ggt.domain.user.UserResponse">
         SELECT
-            <include refid="postColumns" />
+            <include refid="userColumns" />
         FROM
             ggt_user
         WHERE
@@ -26,7 +26,7 @@
     <!-- 사용자 상세정보 조회 -->
     <select id="findById" parameterType="String" resultType="com.kr.ggt.domain.user.UserResponse">
         SELECT
-            <include refid="postColumns" />
+            <include refid="userColumns" />
         FROM
             ggt_user
         WHERE
@@ -42,23 +42,35 @@
             ggt_user_pnum = #{value}
     </select>
 
-    <!-- 게시글 리스트 전체조회 -->
-    <select id="findAll" resultType="com.kr.ggt.domain.user.UserResponse">
+    <!-- 유저 리스트 전체조회 -->
+    <select id="findAll" parameterType="com.kr.ggt.common.dto.SearchDto" resultType="com.kr.ggt.domain.user.UserResponse">
         SELECT
-            <include refid="postColumns" />
+            <include refid="userColumns" />
         FROM
             ggt_user
         WHERE
             1=1
         ORDER BY
             ggt_user_idx DESC
+        LIMIT #{pagination.limitStart}, #{recordSize}
     </select>
+
+    <!-- 유저 카운팅 -->
+    <select id="count" parameterType="com.kr.ggt.common.dto.SearchDto" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            ggt_user
+        WHERE
+            1=1
+    </select>
+
 
 
         <!-- 유저 저장 -->
     <insert id="saveUser" parameterType="com.kr.ggt.domain.user.UserRequest">
         INSERT INTO ggt_user (
-            <include refid="postColumns" />
+            <include refid="userColumns" />
         ) VALUES (
               #{ggtUserId}
             , #{ggtUserPnum}

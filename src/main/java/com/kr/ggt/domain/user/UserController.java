@@ -1,11 +1,15 @@
 package com.kr.ggt.domain.user;
 
 import com.kr.ggt.common.dto.MessageDto;
+import com.kr.ggt.common.dto.SearchDto;
+import com.kr.ggt.paging.Pagination;
+import com.kr.ggt.paging.PagingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -46,11 +50,11 @@ public class UserController {
 
     //사용자 리스트
     @GetMapping("/ggtUserList.do")
-    public String ggtUserList(Model model){
+    public String ggtUserList(@ModelAttribute("params") final SearchDto params, Model model){
 
-        List<UserResponse> result = userService.ggtFindAll();
+        PagingResponse<UserResponse> response = userService.ggtFindAll(params);
+        model.addAttribute("response", response);
 
-        model.addAttribute("list", result);
         return "user/list";
     }
 
