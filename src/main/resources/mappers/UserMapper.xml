@@ -3,9 +3,39 @@
 
 <mapper namespace="com.kr.ggt.domain.user.UserMapper">
 
+
+        <!-- 게시글 검색 -->
+    <sql id="search">
+        <!-- 검색 키워드가 있을 때 -->
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <!-- 검색 유형이 있을 때 -->
+                <when test="searchType != null and searchType != ''">
+                    <choose>
+                        <when test="'user_id'.equals( searchType )">
+                            AND ggt_user_id LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                        <when test="'user_name'.equals( searchType )">
+                            AND ggt_user_name LIKE CONCAT('%', #{keyword}, '%')
+                        </when>
+                    </choose>
+                </when>
+                <!-- 전체 검색일 때 때 -->
+                <otherwise>
+                    AND (
+                           ggt_user_id LIKE CONCAT('%', #{keyword}, '%')
+                        OR ggt_user_name LIKE CONCAT('%', #{keyword}, '%')
+                    )
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+
+
     <!-- tb_post 테이블 전체 컬럼 -->
     <sql id="userColumns">
-          ggt_user_id
+          ggt_user_idx
+        , ggt_user_id
         , ggt_user_pnum
         , ggt_user_name
         , ggt_user_reg_date
@@ -50,6 +80,7 @@
             ggt_user
         WHERE
             1=1
+            <include refid="search" />
         ORDER BY
             ggt_user_idx DESC
         LIMIT #{pagination.limitStart}, #{recordSize}
@@ -63,6 +94,7 @@
             ggt_user
         WHERE
             1=1
+            <include refid="search" />
     </select>
 
 

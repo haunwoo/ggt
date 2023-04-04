@@ -45,9 +45,11 @@
                 </tbody>
             </table>
             <p class="btn_set">
-                <a th:href="@{/ggtUserAddView.do( ggtUserId=${user.ggtUserId} )}" class="btns btn_bdr4 btn_mid">수정</a>
+                <button type="button" onclick="goWritePage();" class="btns btn_bdr4 btn_mid">수정</button>
                 <button type="button" onclick="ggtUserDelete();" class="btns btn_bdr1 btn_mid">삭제</button>
-                <a th:href="@{/ggtUserList.do}" class="btns btn_bdr3 btn_mid">뒤로</a>
+                <button type="button" onclick="goListPage();" class="btns btn_bdr3 btn_mid">뒤로</button>
+                <!--<a th:href="@{/ggtUserAddView.do( ggtUserId=${user.ggtUserId} )}" class="btns btn_bdr4 btn_mid">수정</a>-->
+                <!--<a th:href="@{/ggtUserList.do}" class="btns btn_bdr3 btn_mid">뒤로</a>-->
             </p>
         </section>
     </div> <!--/* .content */-->
@@ -63,15 +65,31 @@
             return false;
           }
 
+            let inputHtml = '';
+                new URLSearchParams(location.search).forEach((value, key) => {
+                    inputHtml += `<input type="hidden" name="${key}" value="${value}" />`;
+            })
+
           const formHtml = `
               <form id="deleteForm" action="/ggtUserdelete.do" method="post">
-                  <input type="hidden" id="ggtUserId" name="ggtUserId" value="${id}" />
+                  ${inputHtml}
               </form>
           `;
           const doc = new DOMParser().parseFromString(formHtml, 'text/html');
           const form = doc.body.firstChild;
           document.body.append(form);
           document.getElementById('deleteForm').submit();
+        }
+        // 게시글 리스트 페이지로 이동
+        function goListPage() {
+            const queryString = new URLSearchParams(location.search);
+            queryString.delete('ggtUserId');
+            location.href = '/ggtUserList.do' + '?' + queryString.toString();
+        }
+
+        // 게시글 수정 페이지로 이동
+        function goWritePage() {
+            location.href = '/ggtUserAddView.do' + location.search;
         }
 
         /*]]>*/

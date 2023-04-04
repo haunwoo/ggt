@@ -16,13 +16,13 @@
       <div class="search_box">
         <form id="searchForm" onsubmit="return false;" autocomplete="off">
           <div class="sch_group fl">
-            <select title="검색 유형 선택">
-              <option value="">전체 검색</option>
-              <option value="">제목</option>
-              <option value="">내용</option>
+            <select id="searchType" name="searchType" title="검색 유형 선택">
+                <option value="">전체 검색</option>
+                <option value="user_id">아이디</option>
+                <option value="user_name">이름</option>
             </select>
-            <input type="text" placeholder="키워드를 입력해 주세요." title="키워드 입력" />
-            <button type="button" class="bt_search"><i class="fas fa-search"></i><span class="skip_info">검색</span></button>
+            <input type="text" id="keyword" name="keyword" placeholder="키워드를 입력해 주세요." title="키워드 입력" />
+            <button type="button" class="bt_search" onclick="movePage(1);"><i class="fas fa-search"></i><span class="skip_info">검색</span></button>
           </div>
         </form>
       </div>
@@ -30,7 +30,6 @@
       <!--/* 리스트 */-->
       <table class="tb tb_col">
         <colgroup>
-          <col style="width:5%;" />
           <col style="width:5%;" />
           <col style="width:18%;" />
           <col style="width:18%;" />
@@ -41,7 +40,6 @@
         <thead>
           <tr>
             <th scope="col"><input type="checkbox" /></th>
-            <th scope="col">번호</th>
             <th scope="col">이름</th>
             <th scope="col">아이디</th>
             <th scope="col">직업</th>
@@ -73,13 +71,6 @@
           <span class="on">1</span>
           <a href="#">2</a>
           <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
-          <a href="#">7</a>
-          <a href="#">8</a>
-          <a href="#">9</a>
-          <a href="#">10</a>
         </p>
         <a href="#" class="page_bt next">다음 페이지 그룹</a><a href="#" class="page_bt last">마지막 페이지</a>-->
       </div>
@@ -97,6 +88,7 @@
     /*<![CDATA[*/
 
     window.onload = () => {
+      setQueryStringParams();
       findAllPost();
     }
 
@@ -128,9 +120,8 @@
         html += `
             <tr>
                 <td><input type="checkbox" /></td>
-                <td th:text="${num}"></td>
                 <td>${row.ggtUserName}</td>
-                <td class="tl"><a href="/ggtUserView.do?ggtUserId=${row.ggtUserId}">${row.ggtUserId}</a></td>
+                <td class="tl"><a href="javascript:void(0);" onclick="goViewPage('${row.ggtUserId}');">${row.ggtUserId}</a></td>
                 <td>${row.ggtUserJob}</td>
                 <td>${dayjs(row.ggtUserRegDate).format('YYYY-MM-DD')}</td>
                 <td>${row.ggtUserLevel}</td>
@@ -183,13 +174,40 @@
 
     // 페이지 이동
     function movePage(page) {
+      const form = document.getElementById('searchForm');
       const queryParams = {
-        page: (page) ? page : 1,
-        recordSize: 10,
-        pageSize: 10
+            page: (page) ? page : 1
+          , recordSize: 10
+          , pageSize: 10
+          , searchType: form.searchType.value
+          , keyword: form.keyword.value
       }
       location.href = location.pathname + '?' + new URLSearchParams(queryParams).toString();
+
     }
+
+    // 쿼리 스트링 파라미터 셋팅
+    function setQueryStringParams() {
+
+        if ( !location.search ) {
+            return false;
+        }
+
+        const form = document.getElementById('searchForm');
+
+        new URLSearchParams(location.search).forEach((value, key) => {
+            if (form[key]) {
+                form[key].value = value;
+            }
+        })
+    }
+
+    // 게시글 상세 페이지로 이동
+    function goViewPage(id) {
+        const queryString = (location.search) ? location.search + `&ggtUserId=${id}` : `?ggtUserId=${id}`;
+        location.href = '/ggtUserView.do' + queryString;
+    }
+
 
     /*]]>*/
   </script>

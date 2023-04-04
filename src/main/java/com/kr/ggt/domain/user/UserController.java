@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -74,10 +76,13 @@ public class UserController {
 
      //사용자 삭제
     @PostMapping("/ggtUserdelete.do")
-    public String deletePost(@RequestParam final String ggtUserId, Model model) {
+    public String deletePost(@RequestParam final String ggtUserId, final SearchDto queryParams, Model model) {
+
+
         userService.ggtDeleteUser(ggtUserId);
 
-        MessageDto message = new MessageDto("사용자가 삭제되었습니다", "/ggtUserList.do", RequestMethod.GET, null);
+        MessageDto message = new MessageDto("사용자가 삭제되었습니다", "/ggtUserList.do", RequestMethod.GET, queryParamsToMap(queryParams));
+
         return showMessageAndRedirect(message, model);
     }
 
@@ -87,6 +92,15 @@ public class UserController {
         return "common/messageRedirect";
     }
 
-
+    // 쿼리 스트링 파라미터를 Map에 담아 반환한다.
+    private Map<String, Object> queryParamsToMap(final SearchDto queryParams) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("page", queryParams.getPage());
+        data.put("recordSize", queryParams.getRecordSize());
+        data.put("pageSize", queryParams.getPageSize());
+        data.put("keyword", queryParams.getKeyword());
+        data.put("searchType", queryParams.getSearchType());
+        return data;
+    }
 
 }
