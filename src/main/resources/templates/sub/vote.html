@@ -27,31 +27,51 @@
 
                 <form action="#">
 
-                  <div class="col-lg-6">
+                  <div class="col-lg-6" style="max-width:100%;">
                     <div class="widget-next-match">
                       <div class="widget-title">
                         <h3>참여투표</h3>
                       </div>
 
                       <table class="table custom-table">
+                        <colgroup>
+                          <col style="width:20%;" />
+                          <col style="width:80%;" />
+                        </colgroup>
+
                         <tbody>
                           <tr>
-                            <td>일시 : </td>
-                            <td><strong class="text-white">2023-03-30</strong></td>
+                            <td style="font-weight: bold;">일시</td>
+                            <td><strong class="text-white">매주 목요일 날짜 삽입</strong></td>
                           </tr>
+
+                          <tr>
+                            <td style="font-weight: bold; color: chartreuse;">참석자</td>
+                            <td style="font-weight: bold;">장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우</td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight: bold; color: crimson;">불참자</td>
+                            <td style="font-weight: bold;">장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우</td>
+                          </tr>
+                          <tr>
+                            <td style="font-weight: bold;">미참여자</td>
+                            <td style="font-weight: bold;">장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우, 장현우</td>
+                          </tr>
+
                         </tbody>
                       </table>
                     </div>
+                    <div class="form-group" style="margin-top:10px; text-align: center;">
+                      <input type="submit" class="btn btn-primary py-3 px-5" style="color: chartreuse;" value="참석">
+                      <input type="submit" class="btn btn-primary py-3 px-5" value="불참">
+                    </div>
                   </div>
-
-                  <div class="form-group" style="margin-top:10px;">
-                    <input type="submit" class="btn btn-primary py-3 px-5" value="참석">
-                    <input type="submit" class="btn btn-primary py-3 px-5" value="불참">
-                  </div>
-
-
                 </form>
 
+                <div class="form-group">
+                    <input type="text" id="content" name="content" class="form-control" placeholder="댓글내용" style=" width: 70%; float: left;">
+                    <input type="text" onclick="commentList();" class="btn btn-primary py-3 px-5" value="입력" style="float: right; width: 20%;">
+                  </div>
               </div>
             </div>
 
@@ -59,7 +79,47 @@
           </div>
         </div>
     </div>
+<th:block layout:fragment="script">
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+
+    window.onload = () => {
+
+
+
+    }
+
+    function commentList(){
+
+      const contentText = document.getElementById('content').value;
+
+        $.ajax({
+          type : "POST",                // HTTP method type(GET, POST) 형식이다.
+          url : "/com/commentSave.do",  // 컨트롤러에서 대기중인 URL 주소이다.
+          data : {"content" : contentText},
+          success : function(res){      // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+              // 응답코드 > 0000
+              alert(res.code);
+          },
+          error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+              alert("통신 실패.")
+          }
+        });
+      }
+
+
+
+
+    /*]]>*/
+  </script>
+</th:block>
+
+
 
 
   </th:block>
+
+
+
+
 </html>

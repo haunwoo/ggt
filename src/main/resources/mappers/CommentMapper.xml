@@ -17,7 +17,7 @@
 
     <!-- 댓글 저장 -->
     <insert id="save" parameterType="com.kr.ggt.domain.comment.CommentRequest" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO tb_comment (
+        INSERT INTO ggt_board_comment (
             <include refid="commentColumns" />
         ) VALUES (
               #{id}
@@ -36,7 +36,7 @@
         SELECT
             <include refid="commentColumns" />
         FROM
-            tb_comment
+            ggt_board_comment
         WHERE
             id = #{value}
     </select>
@@ -44,7 +44,7 @@
 
     <!-- 댓글 수정 -->
     <update id="update" parameterType="com.kr.ggt.domain.comment.CommentRequest">
-        UPDATE tb_comment
+        UPDATE ggt_board_comment
         SET
               modified_date = NOW()
             , content = #{content}
@@ -56,7 +56,7 @@
 
     <!-- 댓글 삭제 -->
     <delete id="deleteById" parameterType="long">
-        UPDATE tb_comment
+        UPDATE ggt_board_comment
         SET
             delete_yn = 1
         WHERE
@@ -69,7 +69,7 @@
         SELECT
             <include refid="commentColumns" />
         FROM
-            tb_comment
+            ggt_board_comment
         WHERE
             delete_yn = 0
             AND post_id = #{value}

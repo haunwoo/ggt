@@ -1,9 +1,13 @@
 package com.kr.ggt.domain.sub;
 
+import com.kr.ggt.domain.comment.CommentRequest;
+import com.kr.ggt.domain.user.UserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
@@ -19,8 +23,7 @@ public class SubController {
     @GetMapping("/sub/vote.do")
     public String vote(Model model){
         
-        //로그인 체크 및 투표 여부 확인해야함
-        
+
         return "sub/vote";
     }
 

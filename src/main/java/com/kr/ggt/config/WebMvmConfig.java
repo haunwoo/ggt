@@ -12,7 +12,7 @@ public class WebMvmConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoggerInterceptor())
-                .excludePathPatterns("/css/**", "/images/**", "/js/**");
+                .excludePathPatterns("/css/**", "/images/**", "/js/**", "/fonts/**");
     }
 
 }
