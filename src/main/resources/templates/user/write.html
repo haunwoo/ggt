@@ -16,6 +16,7 @@
                     <!--/* 게시글 수정인 경우, 서버로 전달할 게시글 번호 (PK) */-->
                     <!--<input type="hidden" id="ggtUserIdChk" name="id" th:if="${user != null}" th:value="${user.ggtUserId}" />-->
 
+
                     <!--/* 서버로 전달할 공지글 여부 */-->
                     <input type="hidden" id="noticeYn" name="noticeYn" />
                     <table class="tb tb_row">
@@ -81,15 +82,20 @@
 
                 document.getElementById('saveBtn').disabled = true;
                 //form.noticeYn.value = form.isNotice.checked;
-                form.action = [[ ${user == null} ]] ? '/ggtUserAdd.do' : '/ggtUserUpdate.do';
+                form.action = [[ ${user == null} ]] ? '/ggtUserAdd.do' : '/ggtUserUpdate. do';
                 form.submit();
+
             }
 
             // 사용자 상세정보 렌더링
             function renderPostInfo() {
               const user = [[ ${user} ]];
 
+
+
+
               if ( !user ) {
+
                 initCreatedDate();
                 return false;
               }

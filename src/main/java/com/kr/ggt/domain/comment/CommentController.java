@@ -15,6 +15,7 @@ public class CommentController {
     @PostMapping("/com/commentSave.do")
     public String commentSave(@RequestParam final String content){
 
+        //로그인 아이디 체크
 
 
 

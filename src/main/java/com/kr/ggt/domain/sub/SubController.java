@@ -22,7 +22,6 @@ public class SubController {
     //투표페이지이동
     @GetMapping("/sub/vote.do")
     public String vote(Model model){
-        
 
         return "sub/vote";
     }
